@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta content="text/html; charset=utf-8" http-equiv="content-type" />
+        <title>Mon livre d'Or</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+        <link rel="stylesheet" type="text/css"   href="livre.css" />
+    </head>
+    <body>
+        <div class="main">
+        <div style="display: inline-flex;">
+            <h3>Bienvenue dans mon livre d'Or!</h3>
+            <img src="img/livre.png" alt="livre" style="margin-left: 20px;margin-top: 15px;" width="40px" height="40px">
+        </div>
+        <section>
+        <div class="form">
+        <p class="entete"><u>Merci de remplir ce formulaire</u></p>
+        <form>
+            <label>Nom</label><br>
+            <input name="nom" autocomplete="off" class="input1" placeholder="Nom" type="text" /> <br />
+            <label>Email</label><br>
+            <input name="email" autocomplete="off" placeholder="Email" type="text" /> <br /><br />
+            <label>Votre message</label> <br />
+            <textarea cols="40" rows="3" name="comment" placeholder="Message"> </textarea><br />
+            <div class="btn">
+                <input class="button1" type="submit" value="Soumettre" onclick = "traiter(this.form); return false;" />
+                <input class="button2" type="reset" value="Annuler" />
+            </div>
+            
+        </form>
+        <hr>
+
+        <p><a href="http://yasmina.emi.ac.ma/~melmimouni/guestbook.html">Voir mon livre d'or</a></p>
+        <p><a href="index.html">Retour vers la page d'accueil</a></p>
+        </div>
+       </section>
+    </div>
+            <footer>
+                <div class="info">
+                    <i class="fa fa-address-card" style="font-size:20px"></i> Nom  :ELMIMOUNI Mohamed <br/>
+                    <i class="fa fa-envelope" style="font-size:20px"></i> Email : mohamedelmimouni@student.emi.ac.ma
+                    <p class="date" id="date"></p>
+                </div>
+          
+                <p class="copy">©Copyright 2020. Tous droits reservés.</p>
+            </footer>
+            <script type="text/javascript">
+                function traiter(maForm){
+                var str1 = maForm.nom.value;
+                var str3 = maForm.email.value;
+                var str4 = maForm.comment.value;
+                
+                /* Je crÃ©mon objet XMLHttpRequest */
+                     var myXMLHttp = new XMLHttpRequest();
+                      var get="http://yasmina.emi.ac.ma/~melmimouni/cgi-bin/guestbook.py?nom="+str1+"&email="+str3+"&comment="+str4;
+                myXMLHttp.open("GET", get, false);
+                            myXMLHttp.send(null);
+                
+                            /* On traite la rÃ©nse */
+                                        if (myXMLHttp.readyState==4 && myXMLHttp.status==200){
+                                            document.getElementById("msgVisit").innerHTML =  myXMLHttp.responseText;
+                                        } else {
+                                        document.write("Err: "+myXMLHttp.readyState +
+                                               " " +myXMLHttp.status);}
+                                                     
+                }  </script>
+    </body>
+</html>
